@@ -12,6 +12,8 @@ import { getIFramePath, getIFrameUrl } from '@/utils/iframe'
 Vue.use(Router)
 
 const router = new Router({
+  mode:'history',
+  base: '/history',
   routes: [
     {
       path: '/',
@@ -21,7 +23,7 @@ const router = new Router({
       children: [
         { 
           path: '', 
-          name: '系统介绍', 
+          name: '首页', 
           component: Intro,
           meta: {
             icon: 'fa fa-home fa-lg',
@@ -44,6 +46,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  // debugger
   // 登录界面登录成功之后，会把用户信息保存在会话
   // 存在时间为会话生命周期，页面关闭即失效。
   let userName = sessionStorage.getItem('user')
@@ -96,38 +99,38 @@ function addDynamicMenuAndRoutes(userName, to, from) {
         children:[
             {   id:3.1,
                 name:'入库登记',
-                icon:'fa fa-circle',
-                // icon:'fa fa-hand-o-right fa-lg',
+                // icon:'fa fa-circle',
+                icon:'fa fa-hand-o-right',
                 url:'/stock/input' 
             },
             {   id:3.2,
                 name:'出库登记',
-                // icon:'fa fa-hand-o-left fa-lg',
-                icon:'fa fa-circle',
+                icon:'fa fa-hand-o-left',
+                // icon:'fa fa-circle',
                 url:'/stock/output' 
             },
             {   id:3.3,
                 name:'原料库存',
-                // icon:'fa fa-cube fa-lg',
-                icon:'fa fa-circle',
+                icon:'fa fa-cube',
+                // icon:'fa fa-circle',
                 url:'/stock/material' 
             },
             {   id:3.4,
                 name:'成品库存',
-                // icon:'fa fa-cubes fa-lg',
-                icon:'fa fa-circle',
+                icon:'fa fa-cubes',
+                // icon:'fa fa-circle',
                 url:'/stock/goods' 
             },
             {   id:3.5,
                 name:'出入库记录',
-                // icon:'fa fa-calendar fa-lg',
-                icon:'fa fa-circle',
+                icon:'fa fa-calendar',
+                // icon:'fa fa-circle',
                 url:'/stock/inorout' 
             },
             {   id:3.6,
                 name:'库存盘点',
-                // icon:'fa fa-pencil-square fa-lg',
-                icon:'fa fa-circle',
+                icon:'fa fa-pencil-square',
+                // icon:'fa fa-circle',
                 url:'/stock/check' 
             },
         ],

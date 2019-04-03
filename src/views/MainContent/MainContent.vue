@@ -24,7 +24,7 @@
     <div class="main-content">
       <keep-alive>
         <transition name="fade" mode="out-in">
-            <router-view></router-view>
+            <router-view v-if="$store.state.app.menuRouteLoaded"></router-view>
         </transition>
       </keep-alive>
     </div>
@@ -45,6 +45,9 @@ export default {
     mainTabsActiveName: {
       get () { return this.$store.state.tab.mainTabsActiveName },
       set (val) { this.$store.commit('updateMainTabsActiveName', val) }
+    },
+    test:{
+      get() {console.log(`你好：${this.$store.state.app.menuRouteLoaded}`)}
     }
   },
   methods: {
