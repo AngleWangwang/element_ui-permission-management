@@ -9,7 +9,7 @@
             border
             style="width: 100%">
             <el-table-column
-            prop="index"
+            type="index"
             label="编号"
             width="80"
             align="center"
@@ -59,7 +59,7 @@
             :show-overflow-tooltip="true"
             >
                 <template slot-scope="scope">
-                    <el-button size="mini" @click="handleClick(scope.row)" icon="el-icon-edit">角色权限</el-button>
+                    <el-button size="mini" @click="rolePremission(scope.row)" icon="el-icon-edit">角色权限</el-button>
                     <el-button size="mini" @click="handleClick(scope.row)" icon="el-icon-edit">重置密码</el-button>
                     <el-button size="mini" @click="handleClick(scope.row)" icon="el-icon-edit">修改</el-button>
                     <el-button size="mini" @click="handleClick(scope.row)" icon="el-icon-delete">删除</el-button>
@@ -112,7 +112,7 @@
         :visible.sync="roleDialogVisible"
         width="30%"
         :before-close="roleHandleClose">
-        <el-tree
+        <!-- <el-tree
         :data="roleTreeData"
         show-checkbox
         default-expand-all
@@ -120,9 +120,18 @@
         ref="tree"
         highlight-current
         
-        :default-checked-keys="[2,3,5,6,7,8]"
+        :default-checked-keys="defaultCheckedKey"
         :props="defaultProps">
-        </el-tree>
+        </el-tree> -->
+
+        <RoleTree 
+        :roleTreeData = 'roleTreeData' 
+        :defaultCheckedKey = 'defaultCheckedKey' 
+        :defaultProps = 'defaultProps'
+        v-on:get-checked-nodes = 'getNodes'
+        >
+        </RoleTree>  
+
         <div slot="footer" class="dialog-footer">
             <el-button @click="roleDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="roleDialogVisible = false">确 定</el-button>
@@ -132,14 +141,24 @@
     </div>
 </template>
 <script>
+import RoleTree from "@/components/RoleTree"
     export default {
+        components:{
+            RoleTree
+        },
         data() {
             return {
                 // 用户列表
                 tableData: [
                     {
-                        index: "0",
                         id: '12552552552585',
+                        name:"admin",
+                        role:"管理员",
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        email:"jsj@xx.com",
+                    },
+                    {
+                        id: '12552552555685',
                         name:"admin",
                         role:"管理员",
                         address: '上海市普陀区金沙江路 1518 弄',
@@ -193,6 +212,8 @@
                 children: 'children',
                 label: 'label'
                 },
+                //权限树默认选中id集合
+                'defaultCheckedKey': [2,3,5,6,7,8],
                 // 增加用户表单数据
                 ruleForm: {
                     name: '你好是啊',
@@ -225,28 +246,38 @@
             }
         },
         methods: {
+            rolePremission(dom){
+                this.roleDialogVisible = true
+            },
             handleClick(dom){
                 this.roleDialogVisible = true
-                console.log(dom)
+                // console.log(dom)
             },
-            roleHandleClose(){
-
+            roleHandleClose(done){
+                done()
             },
-            addUserHandleClose(){},
+            addUserHandleClose(done){
+                done()
+            },
+            // 增加用户
             addUser(){
                 this.addUserDialogVisible = true
-            }
+            },
+            // 获取权限树勾选的树结构数据
+            getNodes(halfNode,checkedNodes){
+                // console.log(halfNode,checkedNodes)
+            },
+            // // 获取权限树勾选的树结构数据
+            // getCheckedNodes() {
+            //     console.log(this.$refs.tree.getCheckedNodes());
+            // },
+            // //获取权限树勾选的id
+            // getCheckedKeys() {
+            //     console.log(this.$refs.tree.getCheckedKeys());
+            // }
         },
     }
 </script>
 <style lang="scss" scoped>
-    .page-container{
-        padding: 20px;
-    }
-    .mgb20{
-        margin-bottom: 20px;
-    }
-    .dialog-footer{
-        text-align: center;
-    }
+    
 </style>
