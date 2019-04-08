@@ -88,13 +88,20 @@
         <el-dialog
         title="权限"
         :visible.sync="memberDialogVisible"
-        width="30%"
+        width="40%"
         :before-close="memberHandleClose">
-            <div>
-                <el-input v-model="keyword" placeholder="请输入内容"></el-input>
-                <el-button type="primary" icon="el-icon-search">查询</el-button>
-            </div>
-
+        <el-row :gutter="20" class="mgb20">
+            <el-col :span="20">
+                <div class="grid-content bg-purple">
+                    <el-input v-model="keyword" placeholder="请输入内容"></el-input>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="grid-content bg-purple">
+                    <el-button type="primary" icon="el-icon-search">查询</el-button>
+                </div>
+            </el-col>
+        </el-row>       
             <el-table
             :data="menberList"
             border
@@ -151,6 +158,7 @@
         },
         data(){
             return {
+                keyword:'',
                 // 角色列表
                 tableData: [
                     {
