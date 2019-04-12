@@ -7,3 +7,15 @@
 .dialog-footer{
     text-align: center;
 }
+.ta-r{
+    text-align: right;
+}
+.ta-l{
+    text-align: left;
+}
+.pdr{
+    padding-right: 10px;
+}
+.pdl{
+    padding-left: 10px;
+}

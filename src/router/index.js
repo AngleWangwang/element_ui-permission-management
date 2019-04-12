@@ -99,38 +99,32 @@ function addDynamicMenuAndRoutes(userName, to, from) {
         children:[
             {   id:3.1,
                 name:'入库登记',
-                // icon:'fa fa-circle',
                 icon:'fa fa-hand-o-right',
                 url:'/stock/input' 
             },
             {   id:3.2,
                 name:'出库登记',
                 icon:'fa fa-hand-o-left',
-                // icon:'fa fa-circle',
                 url:'/stock/output' 
             },
             {   id:3.3,
                 name:'原料库存',
                 icon:'fa fa-cube',
-                // icon:'fa fa-circle',
                 url:'/stock/material' 
             },
             {   id:3.4,
                 name:'成品库存',
                 icon:'fa fa-cubes',
-                // icon:'fa fa-circle',
                 url:'/stock/goods' 
             },
             {   id:3.5,
                 name:'出入库记录',
                 icon:'fa fa-calendar',
-                // icon:'fa fa-circle',
                 url:'/stock/inorout' 
             },
             {   id:3.6,
                 name:'库存盘点',
                 icon:'fa fa-pencil-square',
-                // icon:'fa fa-circle',
                 url:'/stock/check' 
             },
         ],

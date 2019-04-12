@@ -1,18 +1,30 @@
 <template>
     <div class="page-container">
-        <el-form :inline="true" :model="formInline" class="demo-form-inline" style="float:left;" >
-            <el-form-item >
-                <el-input v-model="formInline.keyword" placeholder="请输入查询的姓名" autocomplete="on"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
-            </el-form-item>
-        </el-form>
-
-
-        <el-row style="text-align:right;" class="mgb20">
-            <el-button type="primary" plain @click="addCustomer()"> <span class="fa fa-edit"></span> 增加客户/供应商资料</el-button>
+        <el-row :gutter="20">
+            <el-col :span="10" class="ta-l">
+                <div class="grid-content">
+                    <el-form :inline="true" :model="formInline" class="demo-form-inline" >
+                        <el-form-item >
+                            <el-input v-model="formInline.keyword" placeholder="请输入查询的姓名" autocomplete="on"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="onSubmit">查询</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-col>
+            <el-col :span="6" :offset="8">
+                <div class="grid-content bg-purple">
+                    <el-row style="text-align:right;" class="mgb20">
+                        <el-button type="primary" plain @click="addCustomer()"> <span class="fa fa-edit"></span> 增加客户/供应商资料</el-button>
+                    </el-row>
+                </div>
+            </el-col>
         </el-row>
+        
+
+
+        
         <el-table
         :data="tableData"
         border
@@ -20,7 +32,7 @@
             <el-table-column
             type="index"
             label="编号"
-            width="50"
+            width="100"
             align="center"
             >
             </el-table-column>
@@ -28,7 +40,7 @@
             <el-table-column
             prop="no"
             label="客户/供应商编号"
-            width="130"
+            width="200"
             align="center"
             >
             </el-table-column>
@@ -36,7 +48,7 @@
             <el-table-column
             prop="name"
             label="客户/供应商名称"
-            width="130"
+            width="200"
             align="center"
             >
             </el-table-column>
@@ -44,7 +56,7 @@
             <el-table-column
             prop="type"
             label="类别"
-            width="80"
+            width="100"
             align="center"
             >
             </el-table-column>
@@ -52,7 +64,7 @@
             <el-table-column
             prop="contacts"
             label="联系人"
-            width="100"
+            width="200"
             align="center"
             >
             </el-table-column>
@@ -60,7 +72,7 @@
             <el-table-column
             prop="tell"
             label="电话"
-            width="150"
+            width="200"
             align="center"
             >
             </el-table-column>
@@ -77,7 +89,7 @@
             <el-table-column
             prop="remark"
             label="备注"
-            width="100"
+            width="250"
             align="center"
             >
             </el-table-column>
@@ -180,7 +192,23 @@
             modifyInfo(row){
                 this.MDialogVisible = true
             },
-            deleteInfo(row){},
+            deleteInfo(row){
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    })     
+                })
+            },
             onSubmit(){
                 console.log(123)
             }
